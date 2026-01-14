@@ -1,2 +1,94 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+:root {
+    --header: hsl(131, 67%, 60%);
+    --header-dark: hsl(156, 32%, 24%);
+    --primary: hsl(156, 24%, 51%);
+    --secondary: hsl(225, 23%, 44%);
+
+    --sticky-yellow: hsl(48, 100%, 78%);
+    --sticky-green: hsl(120, 45%, 78%);
+    --sticky-blue: hsl(210, 65%, 80%);
+    --sticky-purple: hsl(275, 55%, 82%);
+    --sticky-orange: hsl(32, 95%, 78%);
+    --sticky-pink: hsl(340, 85%, 82%);
+
+    --sticky-yellow-soft: hsl(48, 85%, 82%);
+    --sticky-green-soft:  hsl(120, 35%, 82%);
+    --sticky-blue-soft:   hsl(210, 45%, 85%);
+    --sticky-purple-soft: hsl(275, 40%, 86%);
+    --sticky-orange-soft: hsl(32, 80%, 82%);
+    --sticky-pink-soft:   hsl(340, 70%, 86%);
+
+    --sticky-text: hsl(210, 20%, 18%);
+
+
+}
+
+@layer components {
+    .bg-header {
+        background-color: var(--header);
+    }
+
+    .primary {
+        background-color: var(--primary);
+    }
+
+}
+
+@layer utilities {
+
+    .sticky-text {
+        color: var(--sticky-text);
+    }
+
+    .sticky-yellow {
+        background-color: var(--sticky-yellow);
+    }
+    .sticky-green {
+        background-color: var(--sticky-green);
+    }
+    .sticky-blue {
+        background-color: var(--sticky-blue);
+    }
+    .sticky-purple {
+        background-color: var(--sticky-purple);
+    }
+    .sticky-orange {
+        background-color: var(--sticky-orange);
+    }
+    .sticky-pink {
+        background-color: var(--sticky-pink);
+    }
+}
+
+.create:hover {
+    animation: spin 1s ease-in-out;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+.create-msg:hover {
+    animation: appear 1s ease-in-out forwards;
+}
+
+@keyframes appear {
+    0% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-80px);
+        opacity: 100%;
+    }
+}
