@@ -1,3 +1,29 @@
-<main class="h-screen flex flex-col justify-center items-center bg-black">
-  <h1 class="text-5xl text-purple-500 font-bold">Hello World</h1>
-</main>
+<div class="h-screen flex flex-col gap-4 bg-black relative">
+  <nav class="px-6 py-1 h-20 primary flex justify-between items-center">
+    <h1 class="text-3xl text-secondary font-bold">Checklist</h1>
+    <div class="flex gap-3 text-white font-semibold">
+      <button (click)="setViewMode('grid')" class="bg-emerald-700 rounded-md p-1 hover:cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grid2x2-icon lucide-grid-2x2"><path d="M12 3v18"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></button>
+      <button (click)="setViewMode('list')" class="bg-emerald-700 rounded-md p-1 hover:cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-icon lucide-list"><path d="M3 5h.01"/><path d="M3 12h.01"/><path d="M3 19h.01"/><path d="M8 5h13"/><path d="M8 12h13"/><path d="M8 19h13"/></svg></button>
+    </div>
+  </nav>
+  @if( view_mode === "grid") {
+    <main class="flex flex-row flex-wrap justify-start items-center gap-8 mx-auto px-10">
+      @for (task of todos; track $index) {
+        <app-todo [task_info]="task"></app-todo>
+      }
+    </main>  
+  }
+  @else {
+    <main class="flex flex-col justify-center items-center gap-8 mx-auto px-10">
+      @for (task of todos; track $index) {
+        <app-todo-list-item [task_info]="task"></app-todo-list-item>
+      }
+    </main>
+  }
+
+  <button class="absolute bottom-5 right-5 p-2 rounded-md bg-amber-300 flex justify-center items-center hover:cursor-pointer">
+    <span class="text-black flex justify-center items-center">New note</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+  </button>
+
+</div>
