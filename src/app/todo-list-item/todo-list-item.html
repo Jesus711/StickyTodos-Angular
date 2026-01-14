@@ -1,0 +1,5 @@
+<div class="{{ task_info().color }} w-[500px] h-[50px] flex flex-row rounded-sm p-3 sticky-text text-wrap whitespace-break-spaces" cdkDrag >
+    <h2 class="h-5">{{ task_info().title }}</h2>
+    <p class="flex-1">{{ task_info().description}}</p>
+    <p class="text-sm flex justify-end px-2 gap-1">Created on:<span class="font-semibold">{{ task_info().created_date.toDateString() }}</span></p>
+</div>
