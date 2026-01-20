@@ -1,13 +1,19 @@
-import { Component, input } from '@angular/core';
-import { Task } from '../types';
-import { CdkDrag } from '@angular/cdk/drag-drop';
+import { Component, input, output } from '@angular/core';
+import { StickyNote } from '../types';
+import { CdkDrag, CdkDragPreview } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-todo',
-  imports: [CdkDrag],
+  imports: [CdkDrag, CdkDragPreview, CommonModule],
   templateUrl: './todo.html',
   styleUrl: './todo.css',
 })
 export class Todo {
-  task_info = input.required<Task>()
+  note_info = input.required<StickyNote>()
+
+  delete = output<number>();
+
+  update = output<number>();
+
 }
