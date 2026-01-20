@@ -1,4 +1,5 @@
-export interface Task {
+export interface StickyNote {
+    id: number,
     title: string,
     description: string,
     created_date: Date,
