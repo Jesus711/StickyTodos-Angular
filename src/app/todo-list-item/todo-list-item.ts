@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Task } from '../types';
+import { StickyNote } from '../types';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -9,5 +9,5 @@ import { CdkDrag } from '@angular/cdk/drag-drop';
   styleUrl: './todo-list-item.css',
 })
 export class TodoListItem {
-  task_info = input.required<Task>();
+  note_info = input.required<StickyNote>();
 }
