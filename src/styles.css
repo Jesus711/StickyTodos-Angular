@@ -22,9 +22,12 @@
     --sticky-pink-soft:   hsl(340, 70%, 86%);
 
     --sticky-text: hsl(210, 20%, 18%);
-
-
 }
+
+* {
+    box-sizing: border-box;
+}
+
 
 @layer components {
     .bg-header {
