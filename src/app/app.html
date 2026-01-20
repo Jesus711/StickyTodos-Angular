@@ -7,23 +7,30 @@
     </div>
   </nav>
   @if( view_mode === "grid") {
-    <main class="flex flex-row flex-wrap justify-start items-center gap-8 mx-auto px-10">
+    <!-- Removed. To be added later: cdkDropList cdkDropListOrientation="mixed" (cdkDropListDropped)="drop($event)" -->
+    <main class="flex flex-row max-w-[90%] min-h-[600px]flex-wrap justify-start items-center mx-auto px-10 overflow-hidden" >
       @for (task of todos; track $index) {
-        <app-todo [task_info]="task"></app-todo>
+        <app-todo (delete)="deleteSticky($event)" (update)="updateCompleteStatus($event)" [note_info]="task"></app-todo>
       }
     </main>  
   }
   @else {
     <main class="flex flex-col justify-center items-center gap-8 mx-auto px-10">
       @for (task of todos; track $index) {
-        <app-todo-list-item [task_info]="task"></app-todo-list-item>
+        <app-todo-list-item [note_info]="task"></app-todo-list-item>
       }
     </main>
   }
 
-  <button class="absolute bottom-5 right-5 p-2 rounded-md bg-amber-300 flex justify-center items-center hover:cursor-pointer">
+  <button (click)="toggleNoteModal()" class="absolute bottom-5 right-5 p-2 rounded-md bg-amber-300 flex justify-center items-center hover:cursor-pointer">
     <span class="text-black flex justify-center items-center">New note</span>
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
   </button>
+
+  @if (showNoteModal) {
+    <div class="absolute h-screen flex w-full justify-center items-center bg-gray-700/50">
+      <app-todo-form (closeModal)="toggleNoteModal()"></app-todo-form>
+    </div> 
+  }
 
 </div>
