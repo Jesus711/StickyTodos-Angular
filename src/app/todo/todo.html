@@ -1,16 +1,17 @@
-<div class="{{ note_info().color }} w-[315px] h-[275px] mx-5 inline-flex flex-col rounded-sm p-3 pb-1.5 pr-2 sticky-text relative gap-1">
-  <div (click)="delete.emit(note_info().id)" class="absolute right-1.5 top-1.5 hover:cursor-pointer hover:bg-gray-800/90 rounded-md p-1 hover:text-white">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>  </div>
-  <h2 class="h-5 font-semibold text-xl">{{ note_info().title }}</h2>
-  <p class="flex-1">{{ note_info().description }}</p>
+<div class="{{ note_info().color }} w-[315px] h-[275px] inline-flex flex-col rounded-sm p-3 pb-1.5 pr-2 sticky-text relative gap-1">
+  <div (click)="this.delete.emit(note_info().id!)" class="absolute right-1.5 top-1.5 hover:cursor-pointer hover:bg-gray-800/90 rounded-md p-1 hover:text-white">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+  </div>
+  <h2 class="max-w-[90%] font-semibold text-xl overflow-hidden text-ellipsis">{{ note_info().title }}</h2>
+  <p class="flex-1 wrap-break-word">{{ note_info().description }}</p>
   @if (note_info().completed) {
     <div class="flex justify-between">
       <p class="flex justify-end items-center gap-1 font-bold rounded-md">Completed <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-icon lucide-check"><path d="M20 6 9 17l-5-5"/></svg></p>
-      <button (click)="this.update.emit(note_info().id)" class="self-end px-2 flex justify-end items-center text-right font-semibold opacity-90 hover:opacity-100 hover:cursor-pointer hover:bg-gray-900/70 hover:text-white rounded-md">Undo?</button>
+      <button (click)="this.update.emit(note_info().id!)" class="self-end px-2 flex justify-end items-center text-right font-semibold opacity-90 hover:opacity-100 hover:cursor-pointer hover:bg-gray-900/70 hover:text-white rounded-md">Undo?</button>
     </div>
   }
   @else {
-    <button (click)="this.update.emit(note_info().id)" class="self-end px-2 flex justify-end items-center text-right font-semibold opacity-90 hover:opacity-100 hover:cursor-pointer hover:bg-gray-900/70 hover:text-white rounded-md">Mark as Completed</button>
+    <button (click)="this.update.emit(note_info().id!)" class="self-end px-2 flex justify-end items-center text-right font-semibold opacity-90 hover:opacity-100 hover:cursor-pointer hover:bg-gray-900/70 hover:text-white rounded-md">Mark as Completed</button>
   }
   <!-- <p class="text-sm flex justify-end px-2 gap-1">
     Created on:<span class="font-semibold">{{ note_info().created_date.toDateString() }}</span>

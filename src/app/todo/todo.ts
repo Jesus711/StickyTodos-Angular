@@ -1,11 +1,9 @@
 import { Component, input, output } from '@angular/core';
 import { StickyNote } from '../types';
-import { CdkDrag, CdkDragPreview } from '@angular/cdk/drag-drop';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-todo',
-  imports: [CdkDrag, CdkDragPreview, CommonModule],
+  imports: [],
   templateUrl: './todo.html',
   styleUrl: './todo.css',
 })
