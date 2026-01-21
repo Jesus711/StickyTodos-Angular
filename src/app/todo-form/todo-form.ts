@@ -11,13 +11,15 @@ import { form, FormField, required } from '@angular/forms/signals';
 export class TodoForm {
   closeModal = output();
 
+  addTodo = output<StickyNote>();
+
   todoModel = signal<StickyNote>({
-    id: 0,
     title: "",
     description: "",
-    created_date: new Date(),
+    created_date: new Date().toLocaleString(),
     completed: false,
-    color: "sticky-yellow"
+    color: "sticky-yellow",
+    completed_date: ""
   })
 
   todoForm = form(this.todoModel, (f) => {
@@ -29,15 +31,23 @@ export class TodoForm {
     f.completed;
   });
 
-  createTodo = output<StickyNote>();
-
   updateColor(newColor: string) {
     this.todoForm.color().value.set(newColor);
   }
 
   onSubmit(event: Event) {
     event.preventDefault()
-    console.log("HELLO")
+    console.log("HERE")
+
+    if (this.todoForm().valid()){
+      this.addTodo.emit(this.todoModel());
+      this.closeModal.emit()
+    }
+    else {
+      console.log("ERROR")
+    }
+
+
   }
 
 
