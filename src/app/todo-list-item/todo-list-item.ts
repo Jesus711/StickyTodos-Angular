@@ -1,13 +1,16 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { StickyNote } from '../types';
-import { CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-todo-list-item',
-  imports: [CdkDrag],
+  imports: [],
   templateUrl: './todo-list-item.html',
   styleUrl: './todo-list-item.css',
 })
 export class TodoListItem {
   note_info = input.required<StickyNote>();
+
+  delete = output<number>()
+
+  update = output<number>()
 }
