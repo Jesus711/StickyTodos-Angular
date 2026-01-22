@@ -8,10 +8,11 @@ import { TodoForm } from './todo-form/todo-form';
 import { TodoService } from './services/todo.service';
 import { liveQuery } from 'dexie';
 import { AsyncPipe, NgClass } from '@angular/common';
+import { Sidebar } from './sidebar/sidebar';
 
 @Component({
   selector: 'app-root',
-  imports: [Todo, TodoListItem, TodoForm, AsyncPipe, NgClass],
+  imports: [Todo, TodoListItem, TodoForm, AsyncPipe, NgClass, Sidebar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -20,6 +21,7 @@ import { AsyncPipe, NgClass } from '@angular/common';
 export class App {
 
   todos = liveQuery(() => this.todoService.getAllNotes())
+
   view_mode: "grid" | "list" = 'grid';
 
   constructor(private todoService: TodoService) {
@@ -30,6 +32,7 @@ export class App {
   }
 
   showNoteModal: boolean = false;
+  showSideBar: boolean = false;
 
   setViewMode(mode: "grid" | "list") {
     this.view_mode = mode;
@@ -81,6 +84,10 @@ export class App {
 
   toggleNoteModal(): void {
     this.showNoteModal = !this.showNoteModal;
+  }
+
+  toggleSideBar(): void {
+    this.showSideBar = !this.showSideBar;
   }
 
 }

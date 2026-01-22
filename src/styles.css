@@ -38,6 +38,14 @@
         background-color: var(--primary);
     }
 
+    .secondary {
+        background-color: var(--secondary);
+    }
+
+    .bg-header-dark {
+        background-color: var(--header-dark);
+    }
+
 }
 
 @layer utilities {
