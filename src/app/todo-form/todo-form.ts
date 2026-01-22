@@ -19,7 +19,8 @@ export class TodoForm {
     created_date: new Date().toLocaleString(),
     completed: false,
     color: "sticky-yellow",
-    completed_date: ""
+    completed_date: "",
+    listID: 1
   })
 
   todoForm = form(this.todoModel, (f) => {
@@ -29,6 +30,7 @@ export class TodoForm {
     f.color;
     f.created_date;
     f.completed;
+    f.listID;
   });
 
   updateColor(newColor: string) {
