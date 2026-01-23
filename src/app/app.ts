@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Todo } from './todo/todo';
-import { StickyNote } from './types';
+import { StickyNote, NoteUpdateEvent } from './types';
 import { TodoListItem } from "./todo-list-item/todo-list-item";
 import { CdkDrag, CdkDropList, moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TodoForm } from './todo-form/todo-form';
@@ -17,18 +17,24 @@ import { Sidebar } from './sidebar/sidebar';
   styleUrl: './app.css'
 })
 
-
 export class App {
 
   todos = liveQuery(() => this.todoService.getAllNotes())
 
   view_mode: "grid" | "list" = 'grid';
 
+  currentlyViewing = "All Notes"
+
   constructor(private todoService: TodoService) {
     const prevView = window.localStorage.getItem("view-mode")
     if (prevView !== null && (prevView === "grid" || prevView === "list")) {
       this.setViewMode(prevView)
     }
+  }
+
+  deleteALL() {
+    this.todoService.deleteTables();
+    console.log("DB RESET!!!!")
   }
 
   showNoteModal: boolean = false;
@@ -43,10 +49,10 @@ export class App {
   //   moveItemInArray(this.todos, event.previousIndex, event.currentIndex)
   // }
 
-  deleteSticky(id: number) {
+  deleteSticky(event: NoteUpdateEvent) {
     try {
-      this.todoService.deleteNote(id);
-      return id;
+      this.todoService.deleteNote(event.noteID, event.listID);
+      return event.noteID;
     } catch (error) {
       console.log("Error when trying to delete")
       return -1;

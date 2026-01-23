@@ -6,7 +6,9 @@
       <div class="w-5 h-1 rounded-md bg-black"></div>
       <div class="w-5 h-1 rounded-md bg-black"></div>
     </button> 
-    <h1 class="flex-1 text-3xl text-secondary font-bold text-black italic">StickyTodos</h1>
+    <h1 class="flex text-3xl text-secondary font-bold text-black italic">StickyTodos</h1>
+    <h2 class="flex-1 text-2xl text-secondary font-bold text-black italic text-center">Currently Viewing: {{ currentlyViewing }}</h2>
+    <button (click)="deleteALL()">DLETE ALLL</button>
     <div class="flex gap-1 text-white font-semibold bg-black rounded-sm outline-3 outline-green-900 relative">
       <button (click)="setViewMode('grid')" class="rounded-md p-1 hover:cursor-pointer bg-transparent z-10">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grid2x2-icon lucide-grid-2x2"><path d="M12 3v18"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
@@ -21,7 +23,7 @@
   @defer (when todos | async ) {
     @if( view_mode === "grid") {
       <!-- Removed. To be added later: cdkDropList cdkDropListOrientation="mixed" (cdkDropListDropped)="drop($event)" -->
-      <main class="flex flex-row max-w-[86%] min-h-[200px] flex-wrap p-8 items-center mx-auto gap-8 overflow-hidden" >
+      <main class="flex flex-row max-w-[86%] min-h-[200px] flex-wrap p-8 items-center gap-8 overflow-hidden">
         @for (note of (todos | async); track $index) {
           <app-todo (delete)="deleteSticky($event)" (update)="updateCompleteStatus($event)" [note_info]="note"></app-todo>
         }
