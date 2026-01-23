@@ -1,5 +1,5 @@
 .appear {
-    animation: fade-in 300ms forwards ease-in-out;
+    animation: fade-in 800ms forwards ease-in-out;
 }
 
 @keyframes fade-in {

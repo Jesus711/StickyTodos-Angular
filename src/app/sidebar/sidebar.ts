@@ -14,14 +14,11 @@ import { SidebarList } from '../sidebar-list/sidebar-list';
 export class Sidebar {
   display = input.required<boolean>();
 
-  noteLists = liveQuery(() => this.todoService.getAllLists())
+  noteLists = liveQuery(() =>
+    this.todoService.getAllLists())
 
   closeSidebar = output();
 
   constructor(private todoService: TodoService) {}
-
-  displayLists() {
-  }
-
 
 }
