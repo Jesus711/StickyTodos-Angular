@@ -10,8 +10,15 @@ import { StickyNote } from '../types';
 export class Todo {
   note_info = input.required<StickyNote>()
 
-  delete = output<number>();
+  delete = output<{noteID: number, listID: number}>();
 
   update = output<number>();
+
+  deleteNote(noteID: number, listID: number) {
+    this.delete.emit({
+      noteID: noteID,
+      listID: listID
+    });
+  }
 
 }
