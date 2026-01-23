@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { NoteList, StickyNote } from '../types';
+import { NoteList } from '../types';
 import { TodoService } from '../services/todo.service';
 
 @Component({
@@ -11,19 +11,8 @@ import { TodoService } from '../services/todo.service';
 export class SidebarList {
   list = input.required<NoteList>();
 
-  listNotes: StickyNote[] = []
 
   constructor(private todoService: TodoService) {
-    this.getListNotes()
-  }
-
-  async getListNotes() {
-
-    if(this.list() === undefined) {
-      return
-    }
-
-    this.listNotes = await this.todoService.getNotesByList(this.list().id!)
   }
 
 }
