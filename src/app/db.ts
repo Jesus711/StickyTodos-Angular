@@ -9,15 +9,16 @@ export class StickyNoteDB extends Dexie {
   constructor() {
     super("ngdexieliveQuery")
 
-    this.version(2).stores({
-      notes: '++id, completed',
-      lists: '++id'
+    this.version(3).stores({
+      notes: '++id, completed, listID, created_date',
+      lists: '++id, noteCount'
     })
 
     this.on('populate', async (tx) => {
       const listID = await tx.table("lists").add({
         title: "General",
         protected: true,
+        noteCount: 0,
       })
     })
   }

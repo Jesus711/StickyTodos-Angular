@@ -12,5 +12,11 @@ export interface StickyNote {
 export interface NoteList {
     id?: number,
     title: string,
-    protected: boolean
+    protected: boolean,
+    noteCount: number,
+}
+
+export interface NoteUpdateEvent {
+  noteID: number,
+  listID: number;
 }

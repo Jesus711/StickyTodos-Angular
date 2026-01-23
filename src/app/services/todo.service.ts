@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { db } from "../db";
 import { NoteList, StickyNote } from '../types';
+import { BehaviorSubject } from 'rxjs';
+import Dexie from 'dexie';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
+
+  async deleteTables() {
+    await db.delete()
+    await db.open()
+  }
 
   getAllNotes() {
     return db.notes.toArray();
@@ -17,7 +24,6 @@ export class TodoService {
   }
 
   async getNotesByList(listID: number) {
-    console.log("HERE", listID)
     const list = await db.lists.get(listID)
     if(list === undefined) {
       console.log("Does not exists")
@@ -37,17 +43,26 @@ export class TodoService {
   }
 
   async addNote(newNote: StickyNote) {
-    await db.notes.add(newNote);
-    return newNote.id;
+
+    await db.transaction('rw', db.notes, db.lists, async() => {
+      await db.notes.add(newNote);
+      await db.lists.where("id").equals(newNote.listID).modify(list => {
+        list.noteCount = (list.noteCount ?? 0) + 1
+      })
+    })
   }
 
   async addList(newList: NoteList) {
     await db.lists.add(newList)
-    return newList.id;
   }
 
-  deleteNote(noteID: number) {
-    db.notes.delete(noteID)
+  async deleteNote(noteID: number, listID: number) {
+    await db.transaction('rw', db.notes, db.lists, async() => {
+    await db.notes.delete(noteID);
+    await db.lists.where("id").equals(listID).modify(list => {
+        list.noteCount = Math.max(0, ((list.noteCount ?? 0) - 1))
+      })
+    })
     return noteID;
   }
 
@@ -55,7 +70,7 @@ export class TodoService {
 
     await db.transaction("rw", db.notes, db.lists, async () => {
       await db.notes.where("listID").equals(listID).delete();
-      await db.lists.where("listID").equals(listID).delete();
+      await db.lists.where("id").equals(listID).delete();
     })
   }
 
