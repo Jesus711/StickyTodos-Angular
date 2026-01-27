@@ -11,7 +11,7 @@ export class StickyNoteDB extends Dexie {
 
     this.version(3).stores({
       notes: '++id, completed, listID, created_date',
-      lists: '++id, noteCount'
+      lists: '++id, &title, noteCount'
     })
 
     this.on('populate', async (tx) => {

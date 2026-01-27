@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { db } from "../db";
 import { NoteList, StickyNote } from '../types';
-import { BehaviorSubject } from 'rxjs';
-import Dexie from 'dexie';
 
 
 @Injectable({
@@ -53,7 +51,7 @@ export class TodoService {
   }
 
   async addList(newList: NoteList) {
-    await db.lists.add(newList)
+    return db.lists.add(newList)
   }
 
   async deleteNote(noteID: number, listID: number) {
