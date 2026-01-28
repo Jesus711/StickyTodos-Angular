@@ -43,4 +43,9 @@
     </div>
   </div>
   <button type="submit" class="absolute left-1/2 -translate-x-1/2 -bottom-16 w-[200px] h-[48px] text-xl font-semibold {{ todoForm.color().value() }} text-black rounded-md px-3 py-1 cursor-pointer">Create</button>
+  <select [formField]="todoForm.listID" class="absolute left-1/2 -translate-x-1/2 -top-16 w-[200px] h-[48px] text-xl font-semibold {{ todoForm.color().value() }} text-black rounded-md px-3 py-1 cursor-pointer">
+    @for(list of (noteLists | async); track list.id){
+      <option [value]="list.id">{{list.title}}</option>
+    }
+  </select>
 </form>
