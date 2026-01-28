@@ -81,7 +81,6 @@ export class App {
   async createNewSticky(newTodo: StickyNote) {
     try {
       await this.todoService.addNote(newTodo);
-      console.log(this.todos.getValue)
     } catch (error) {
       console.log("Error occurend when trying to add new note!")
     }
