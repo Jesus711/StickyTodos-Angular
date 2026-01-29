@@ -9,6 +9,8 @@ import { TodoService } from './services/todo.service';
 import { liveQuery } from 'dexie';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Sidebar } from './sidebar/sidebar';
+import { BehaviorSubject, combineLatest} from 'rxjs';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,17 @@ import { Sidebar } from './sidebar/sidebar';
 
 export class App {
 
-  todos = liveQuery(() => this.todoService.getAllNotes())
+  listFilter$ = new BehaviorSubject<number>(-1);
+
+  allTodos$ = liveQuery(() => this.todoService.getAllNotes())
+
+  todos$ = combineLatest([
+    this.allTodos$, 
+    this.listFilter$
+  ]).pipe(
+    map(([todos, listID]) => listID === -1 ? todos : todos.filter(t => t.listID === listID))
+  );
+
 
   view_mode: "grid" | "list" = 'grid';
 
@@ -93,6 +105,17 @@ export class App {
 
   toggleSideBar(): void {
     this.showSideBar = !this.showSideBar;
+  }
+
+  viewListNotes({listID, listTitle}:{listID: number, listTitle: string} ) {
+    if (listID === -1) {
+      this.currentlyViewing = `All Notes`
+    }
+    else {
+      this.currentlyViewing = `${listTitle} Notes`
+
+    }
+    this.listFilter$.next(listID);
   }
 
 }

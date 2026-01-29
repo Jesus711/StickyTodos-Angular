@@ -20,11 +20,11 @@
     </div>
   </nav>
 
-  @defer (when todos | async ) {
+  @defer (when todos$ | async ) {
     @if( view_mode === "grid") {
       <!-- Removed. To be added later: cdkDropList cdkDropListOrientation="mixed" (cdkDropListDropped)="drop($event)" -->
-      <main class="flex flex-row max-w-[90%] min-h-[200px] mx-auto flex-wrap p-8 items-center gap-8">
-        @for (note of (todos | async); track $index) {
+      <main class="flex flex-row max-w-[84%] min-h-[200px] mx-auto flex-wrap py-4 justify-center items-center gap-8">
+        @for (note of (todos$ | async); track $index) {
           <app-todo (delete)="deleteSticky($event)" (update)="updateCompleteStatus($event)" [note_info]="note"></app-todo>
         }
         @empty {
@@ -34,7 +34,7 @@
     }
     @else {
       <main class="flex flex-col min-h-[200px] justify-center items-center gap-8 mx-auto px-10">
-        @for (note of (todos | async); track $index) {
+        @for (note of (todos$ | async); track $index) {
           <app-todo-list-item (delete)="deleteSticky($event)" (update)="updateCompleteStatus($event)" [note_info]="note"></app-todo-list-item>
         }
         @empty {
@@ -59,5 +59,5 @@
       <app-todo-form (closeModal)="toggleNoteModal()" (addTodo)="createNewSticky($event)"></app-todo-form>
     </div> 
   }
-  <app-sidebar [display]="showSideBar" (closeSidebar)="toggleSideBar()"></app-sidebar>
+  <app-sidebar [display]="showSideBar" (closeSidebar)="toggleSideBar()" (selectList)="viewListNotes($event)"></app-sidebar>
 </div>
