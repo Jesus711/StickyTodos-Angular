@@ -1,4 +1,4 @@
-import { Component, input} from '@angular/core';
+import { Component, input, output} from '@angular/core';
 import { NoteList } from '../types';
 import { TodoService } from '../services/todo.service';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 })
 export class SidebarList {
   list = input.required<NoteList>();
+
+  setList = output<{listID: number, listTitle: string}>();
 
   toggleModal = false;
 
@@ -31,6 +33,10 @@ export class SidebarList {
       console.log("DELETED")
     }
     this.toggleModal = false;
+  }
+
+  updateList() {
+    this.setList.emit({listID: this.list().id!, listTitle: this.list().title});
   }
 
 }

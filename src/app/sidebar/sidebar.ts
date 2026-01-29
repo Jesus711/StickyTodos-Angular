@@ -20,6 +20,8 @@ export class Sidebar {
 
   closeSidebar = output();
 
+  selectList = output<{listID: number, listTitle: string}>();
+
   showListForm = false;
 
   errorMessage = signal<string | null>(null);
@@ -72,6 +74,10 @@ export class Sidebar {
 
   toggleListForm() {
     this.showListForm = !this.showListForm;
+  }
+
+  setNotestoList({listID, listTitle}: {listID: number, listTitle: string}) {
+    this.selectList.emit({listID, listTitle})
   }
 
 }
