@@ -2,6 +2,7 @@ import { Component, input, output} from '@angular/core';
 import { NoteList } from '../types';
 import { TodoService } from '../services/todo.service';
 import { CommonModule } from '@angular/common';
+import { TodoFilterService } from '../services/todo-filter.service';
 
 @Component({
   selector: 'app-sidebar-list',
@@ -16,7 +17,7 @@ export class SidebarList {
 
   toggleModal = false;
 
-  constructor(private todoService: TodoService) {
+  constructor(private todoService: TodoService, private todoFilterService: TodoFilterService) {
   }
 
   openDeleteModal() {
@@ -35,8 +36,12 @@ export class SidebarList {
     this.toggleModal = false;
   }
 
+  isListActive() {
+    return this.list().id! === this.todoFilterService.listID();
+  }
+
   updateList() {
-    this.setList.emit({listID: this.list().id!, listTitle: this.list().title});
+    this.todoFilterService.setListID(this.list().id!, this.list().title);
   }
 
 }

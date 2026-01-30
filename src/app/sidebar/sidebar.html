@@ -86,7 +86,7 @@
     <hr class="border-2" />
     <div class="flex flex-col gap-3">
       @for (list of (noteLists | async); track $index) {
-      <app-sidebar-list (setList)="this.setNotestoList($event)" [list]="list"></app-sidebar-list>
+      <app-sidebar-list [list]="list"></app-sidebar-list>
       }
     </div>
   </div>
