@@ -24,7 +24,7 @@
   @defer (when todos$ | async ) {
     @if( view_mode === "grid") {
       <!-- Removed. To be added later: cdkDropList cdkDropListOrientation="mixed" (cdkDropListDropped)="drop($event)" -->
-      <main class="flex flex-row max-w-[84%] min-h-[200px] mx-auto flex-wrap py-4 justify-center items-center gap-8">
+      <main  class="view-change flex flex-row max-w-[84%] min-h-[200px] mx-auto flex-wrap py-4 justify-center items-center gap-8 transition-all duration-300">
         @for (note of (todos$ | async); track $index) {
           <app-todo [note_info]="note"></app-todo>
         }
@@ -34,7 +34,7 @@
       </main>  
     }
     @else {
-      <main class="flex flex-col min-h-[200px] justify-center items-center gap-8 mx-auto px-10">
+      <main class="view-change flex flex-col min-h-[200px] justify-center items-center gap-8 mx-auto px-10 transition-all duration-300">
         @for (note of (todos$ | async); track $index) {
           <app-todo-list-item [note_info]="note"></app-todo-list-item>
         }
