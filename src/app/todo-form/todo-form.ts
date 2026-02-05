@@ -1,9 +1,10 @@
-import { Component, signal, output } from '@angular/core';
+import { Component, signal, output, inject } from '@angular/core';
 import { StickyNote } from '../types';
 import { form, FormField, required } from '@angular/forms/signals';
 import { liveQuery } from 'dexie';
 import { TodoService } from '../services/todo.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { TodoFilterService } from '../services/todo-filter.service';
 
 interface StickyForm {
     id?: number,
@@ -30,7 +31,11 @@ export class TodoForm {
   noteLists = liveQuery(() =>
       this.todoService.getAllLists())
 
-  constructor(private todoService: TodoService) {}
+  filterService$ = inject(TodoFilterService)
+
+  constructor(private todoService: TodoService) {
+    console.log(this.todoModel().listID)
+  }
 
   todoModel = signal<StickyForm>({
     title: "",
@@ -39,7 +44,7 @@ export class TodoForm {
     completed: false,
     color: "sticky-yellow",
     completed_date: "",
-    listID: "1"
+    listID: this.filterService$.listID() > 0 ? String(this.filterService$.listID()) : "1",
   })
 
   todoForm = form(this.todoModel, (f) => {
