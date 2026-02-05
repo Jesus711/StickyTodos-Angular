@@ -72,7 +72,25 @@ export class TodoService {
     })
   }
 
-  async updateNote(updatedNote: StickyNote) {
+  async updateNote(updatedNote: StickyNote, prevList: number, newList: number) {
+
+    console.log(updatedNote)
+    console.log(prevList, newList, prevList === newList)
+
+    await db.transaction('rw', db.notes, db.lists, async() => {
+    await db.notes.upsert(updatedNote.id!, updatedNote);
+    if (prevList !== newList){
+      await db.lists.where("id").equals(prevList).modify(list => {
+          list.noteCount = Math.max(0, ((list.noteCount ?? 0) - 1))
+        })
+      await db.lists.where("id").equals(newList).modify(list => {
+        list.noteCount = (list.noteCount ?? 0) + 1
+      })
+    }
+    })
+  }
+
+  async updateNoteStatus(updatedNote: StickyNote) {
     let updated = await db.notes.upsert(updatedNote.id!, updatedNote);
     if (updated) {
       console.log("Note updated")

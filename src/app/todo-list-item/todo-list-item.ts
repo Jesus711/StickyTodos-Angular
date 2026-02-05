@@ -30,7 +30,7 @@ export class TodoListItem {
     try {
       let currentNote = await this.todoService.getNoteByID(this.note_info().id!)
       if(currentNote !== undefined) {
-        await this.todoService.updateNote({...currentNote, completed: !currentNote.completed});
+        await this.todoService.updateNoteStatus({...currentNote, completed: !currentNote.completed});
       }
       else {
         throw new Error("Note does not exist with that ID")
@@ -41,7 +41,7 @@ export class TodoListItem {
   }
 
   async updateNote() {
-    const updated = await this.todoService.updateNote(this.note_info());
+    const updated = await this.todoService.updateNoteStatus(this.note_info());
     return updated;
   }
 }
