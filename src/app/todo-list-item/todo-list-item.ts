@@ -22,7 +22,6 @@ export class TodoListItem {
 
   deleteNote() {
     this.todoService.deleteNote(this.note_info().id!, this.note_info().listID)
-    //this.showEditMenu = false;
   }
 
 

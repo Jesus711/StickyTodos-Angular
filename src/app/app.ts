@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Todo } from './todo/todo';
-import { StickyNote, NoteUpdateEvent } from './types';
+import { StickyNote } from './types';
 import { TodoListItem } from "./todo-list-item/todo-list-item";
 import { CdkDrag, CdkDropList, moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 import { TodoForm } from './todo-form/todo-form';
@@ -61,17 +61,6 @@ export class App {
   // drop(event: CdkDragDrop<StickyNote[]>) {
   //   moveItemInArray(this.todos, event.previousIndex, event.currentIndex)
   // }
-
-  // deleteSticky(event: NoteUpdateEvent) {
-  //   try {
-  //     this.todoService.deleteNote(event.noteID, event.listID);
-  //     return event.noteID;
-  //   } catch (error) {
-  //     console.log("Error when trying to delete")
-  //     return -1;
-  //   }
-  // }
-
 
   async createNewSticky(newTodo: StickyNote) {
     try {

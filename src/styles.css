@@ -72,6 +72,26 @@
     .sticky-pink {
         background-color: var(--sticky-pink);
     }
+
+    .sticky-yellow-soft {
+        background-color: var(--sticky-yellow-soft);
+    }
+    .sticky-green-soft {
+        background-color: var(--sticky-green-soft);
+    }
+    .sticky-blue-soft {
+        background-color: var(--sticky-blue-soft);
+    }
+    .sticky-purple-soft {
+        background-color: var(--sticky-purple-soft);
+    }
+    .sticky-orange-soft {
+        background-color: var(--sticky-orange-soft);
+    }
+    .sticky-pink-soft {
+        background-color: var(--sticky-pink-soft);
+    }
+
 }
 
 .create:hover {
