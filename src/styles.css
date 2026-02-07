@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
+@theme {
+    --breakpoint-xs: 30rem;
+}
+
 :root {
     --header: hsl(131, 67%, 60%);
     --header-dark: hsl(156, 32%, 24%);
@@ -22,12 +26,12 @@
     --sticky-pink-soft:   hsl(340, 70%, 86%);
 
     --sticky-text: hsl(210, 20%, 18%);
+
 }
 
 * {
     box-sizing: border-box;
 }
-
 
 @layer components {
     .bg-header {
@@ -91,6 +95,7 @@
     .sticky-pink-soft {
         background-color: var(--sticky-pink-soft);
     }
+
 
 }
 

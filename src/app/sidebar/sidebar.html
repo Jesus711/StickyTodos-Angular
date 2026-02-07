@@ -1,6 +1,6 @@
 <aside
   class="z-20 fixed top-0 w-0 h-screen bg-header-dark transition-all duration-400 flex flex-col overflow-hidden"
-  [ngClass]="display() ? 'w-[360px] border-r-4 border-orange-300 rounded-r-md p-4' : 'w-0'"
+  [ngClass]="display() ? 'md:w-[360px] w-[300px] border-r-4 border-orange-300 rounded-r-md p-4' : 'w-0'"
 >
   <button
     (click)="this.closeSidebar.emit()"
@@ -22,7 +22,7 @@
       <path d="m6 6 12 12" />
     </svg>
   </button>
-  <h2 [ngClass]="display() ? 'appear' : ''" class="text-4xl font-semibold italic text-white">
+  <h2 [ngClass]="display() ? 'appear' : ''" class="md:text-4xl text-3xl font-semibold italic text-white">
     StickyTodos
   </h2>
   <div [ngClass]="display() ? 'appear' : ''" class="text-white flex flex-col gap-2 py-5">
