@@ -1,8 +1,8 @@
-<form (submit)="onSubmit($event)" class="relative w-[360px] h-[340px] {{ todoForm.color().value() }} sticky-text p-2.5 gap-2 rounded-md flex flex-col">
+<form (submit)="onSubmit($event)" class="relative xs:w-[360px] w-[320px] h-[340px] {{ todoForm.color().value() }} sticky-text p-2.5 gap-2 rounded-md flex flex-col">
   <button
     type="button"
     (click)="closeModal.emit()"
-    class="w-10 h-10 flex justify-center items-center absolute rounded-full bg-gray-500/80 border-2 border-white text-white -right-10 -top-10 cursor-pointer"
+    class="w-10 h-10 flex justify-center items-center absolute rounded-full bg-gray-500/80 border-2 border-white text-white md:-right-10 md:-top-10 md:translate-auto md:left-auto xs:-bottom-35 -bottom-33 -translate-1/2 left-1/2 cursor-pointer"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -41,8 +41,8 @@
         <button type="button" (click)="updateColor('sticky-orange')" class="w-8 h-8 rounded-full sticky-orange cursor-pointer border-2 border-black"></button>
     </div>
   </div>
-  <button type="submit" class="absolute left-1/2 -translate-x-1/2 -bottom-16 w-[200px] h-[48px] text-xl font-semibold {{ todoForm.color().value() }} text-black rounded-md px-3 py-1 cursor-pointer">Create</button>
-  <select [formField]="todoForm.listID" class="absolute left-1/2 -translate-x-1/2 -top-16 w-[200px] h-[48px] text-xl font-semibold {{ todoForm.color().value() }} text-black rounded-md px-3 py-1 cursor-pointer">
+  <button type="submit" class="absolute left-1/2 -translate-x-1/2 xs:-bottom-15 -bottom-13 w-[200px] xs:h-[48px] h-[40px] xs:text-xl text-lg font-semibold {{ todoForm.color().value() }} text-black rounded-md px-3 py-1 cursor-pointer">Create</button>
+  <select [formField]="todoForm.listID" class="absolute left-1/2 -translate-x-1/2 xs:-top-15 -top-13 w-[200px] xs:h-[48px] h-[40px] xs:text-xl text-lg font-semibold {{ todoForm.color().value() }} text-black rounded-md px-3 py-1 cursor-pointer">
     @for(list of (noteLists | async); track list.id){
       <option [value]="list.id">{{list.title}}</option>
     }
