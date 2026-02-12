@@ -22,8 +22,9 @@
     <button (click)="updateCompleteStatus()" class="self-end px-2 flex justify-end items-center text-right font-semibold opacity-90 hover:opacity-100 hover:cursor-pointer hover:bg-gray-900/70 hover:text-white rounded-md">Mark as Completed</button>
   }
 </div>
+
 @if(showEditForm){
-    <div class="fixed top-0 left-0 z-10 min-h-screen flex w-full justify-center items-center bg-gray-900/50">
-      <app-edit-todo [note]="note_info()" (closeModal)="toggleEditForm()"></app-edit-todo>
-    </div> 
+  <div class="fixed inset-0 z-10 h-screen flex w-full justify-center items-center bg-gray-900/50">
+    <app-edit-todo [note]="note_info()" (closeModal)="toggleEditForm()"></app-edit-todo>
+  </div> 
 }

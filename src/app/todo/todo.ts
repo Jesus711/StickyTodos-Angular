@@ -20,6 +20,8 @@ export class Todo {
   showEditMenu = false;
   showEditForm = false;
 
+  prevScrollY = 0;
+
   constructor(private todoService: TodoService) {
 
   }
@@ -51,6 +53,18 @@ export class Todo {
 
   toggleEditForm() {
     this.showEditForm = !this.showEditForm
+    if(this.showEditForm) {
+      this.prevScrollY = window.scrollY;    
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      }
+    else {
+      document.body.style.overflow = ''; 
+      document.body.style.position = '';
+      document.body.style.width = '';
+      window.scrollTo(0, this.prevScrollY || 0);
+    }
   }
 
   toggleEditMenu() {
